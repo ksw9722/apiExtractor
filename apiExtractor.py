@@ -13,7 +13,7 @@ else:
     c = f.read()
     f.close()
 
-regex = r"(\/api|\/[A-z-0-9]{2,9})\/[A-z0-9-\?=\/]*"
+regex = r"(\/api|\/[A-z-0-9.]{2,9})\/[A-z0-9-\?=\/]*"
 regex = re.compile(regex)
 mo  = regex.search(c)
 
