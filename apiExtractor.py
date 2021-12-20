@@ -2,11 +2,18 @@ import re
 import requests
 import sys
 
+from urllib.parse import urlparse
 source = sys.argv[1]
 
 if 'http' in sys.argv[1]:
     headers = {"Sec-Ch-Ua": "\" Not A;Brand\";v=\"99\", \"Chromium\";v=\"96\"", "Accept": "application/json, text/plain, */*", "Sec-Ch-Ua-Mobile": "?0", "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.45 Safari/537.36", "Sec-Ch-Ua-Platform": "\"Windows\"", "Sec-Fetch-Site": "same-origin", "Sec-Fetch-Mode": "cors", "Sec-Fetch-Dest": "empty", "Referer": "https://new-m.pay.naver.com/historybenefit/paymenthistory", "Accept-Encoding": "gzip, deflate", "Accept-Language": "ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7"}
     c = requests.get(source, headers=headers).text   
+    path = urlparse(sys.argv[1]).path
+    path = path[1:].split('?')[0]
+    f = open(path,'w')
+    f.write(c)
+    f.close()
+    
     
 else:
     f = open('test.js','r')
