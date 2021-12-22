@@ -10,6 +10,7 @@ if 'http' in sys.argv[1]:
     c = requests.get(source, headers=headers).text   
     path = urlparse(sys.argv[1]).path
     path = path[1:].split('?')[0]
+    path = path.replace('/','--')
     f = open(path,'w')
     f.write(c)
     f.close()
@@ -20,10 +21,10 @@ else:
     c = f.read()
     f.close()
 
-regex = r"(\/api|\/[A-z-0-9.]{2,9})\/[A-z0-9-\?=\/]*"
+regex = r"(\/[A-z-0-9.]{2,17})\/[A-z0-9-\?=\/]*"
 regex = re.compile(regex)
 mo  = regex.search(c)
-
+#print(mo)
 index = 0
 #print(mo.group())
 #print(mo.span())
@@ -36,6 +37,7 @@ while True:
         result+=mo.group()+'\n'
         print(mo.group())
     except Exception as e:
+ #       print(e)
         break
 
 f = open('result2.txt','w')
