@@ -12,7 +12,7 @@ if 'http' in sys.argv[1]:
     path = urlparse(sys.argv[1]).path
     path = path[1:].split('?')[0]
     path = path.replace('/','--')
-    f = open(path,'w',encoding='utf-8')
+    f = open('dummy/'+path,'w',encoding='utf-8')
     f.write(c)
     f.close()
     
